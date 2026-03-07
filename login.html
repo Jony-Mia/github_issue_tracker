@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Github Issue Tracker</title>
+    <link rel="stylesheet" href="daisyui@5.css">
+
+</head>
+
+<body class="h-[100vh] flex justify-center items-center"> 
+
+    <section class="container p-8 rounded-2xl shadow-lg w-md   mx-auto">
+        <section class=" m-auto flex flex-col items-center">
+            <div>
+                 <img width="50" class="text-center" src="assets/github-logo.png" alt="">
+                 <br>
+            </div>
+            <h1 class="font-bold text-3xl">Github Issue Tracker</h1>
+            <h1 class="font-medium text-gray-400">Sign in to manage your issues</h1>
+        </section>
+        <section class="mt-4">
+            <div>
+                <label class="label" for="gitemail">Username</label>
+                <input type="email" id="gitemail" placeholder="Enter Your Username" class="input my-2 w-full">
+                <!-- <p class="text-sm text-primary font-semibold">Default: admin</p> -->
+            </div>
+            <br>
+            <div>
+                <label class="label" for="password">Password</label>
+                <input type="password" id="password" placeholder="Enter Your password" class="input my-2 w-full">
+                <!-- <p class="text-sm text-primary font-semibold">Default: admin123</p> -->
+            </div><br>
+            <button class="btn btn-primary w-full">Sign In</button>
+        </section>
+        <h3 class="text-center mt-5">Demo Credential</h3>
+        <section class="text-center mt-3">
+            <section class="p-4 rounded-lg bg-base-200">
+                <h3 class="font-semibold">Username: <span class="font-normal">admin</span></h3>
+                <h3 class="font-semibold">Password: <span class="font-normal">admin123</span></h3>
+            </section>
+        </section>
+    </section>
+
+    <script src="browser@4.js"></script>
+</body>
+
+</html>
