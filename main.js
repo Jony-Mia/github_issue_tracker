@@ -1,5 +1,6 @@
 
 const issuesContainer = document.getElementById("issuesContainer")
+const loader = document.querySelector('.loader');
 const issueAPI = "https://phi-lab-server.vercel.app/api/v1/lab/issues";
 
 // User Credential
@@ -7,19 +8,23 @@ const issueAPI = "https://phi-lab-server.vercel.app/api/v1/lab/issues";
 const user = localStorage.getItem("username");
 const password = localStorage.getItem("password");
 
-if (!user || !password) {
-    window.open("http://127.0.0.1:5500/login.html","_self");
-}
+if (!user || !password) window.open("http://127.0.0.1:5500/login.html","_self");
 
 let issues=[];
 
 async function issuesLoader(){
    let res = await fetch(issueAPI);
    let issuesList = await res.json();
-   issuesList.data.forEach(element => {
-    issues.push(element)
-   }); 
-    issueBox()
+   if (!res.status===200) {
+       loader.style.display="block";  
+    }else{
+       
+    loader.style.display="none"    
+    issuesList.data.forEach(element => {
+        issues.push(element);
+    }); 
+   }
+issueBox()
 }
 
 
@@ -41,7 +46,7 @@ async function issuesLoader(){
       "updatedAt": "2024-01-15T10:30:00Z"
     },
  */
-function issueBox(){
+function issueBox(state){
     issuesContainer.innerHTML='';
     issues.forEach(issueData=>{
     const date = new Date(`${issueData.createdAt}`);
@@ -63,10 +68,10 @@ function issueBox(){
                         <p>${issueData.description}</p>
                         <br>
                         <section>
-                            <button class="btn btn-outline btn-error rounded-full"> 
+                            <button class="badge badge-outline badge-error rounded-full"> 
                                 <i class="fa-brands fa-android"></i>
                                  Bugs</button>
-                            <button class="btn btn-outline btn-warning rounded-full">
+                            <button class="badge badge-outline badge-warning rounded-full">
                                 <i class="fa-regular fa-life-ring"></i> 
                                 Help Wanted</button>
 

@@ -6,11 +6,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Github Issue Tracker</title>
     <link rel="stylesheet" href="daisyui@5.css">
-    <link rel="stylesheet" href="style.css">
     <link media="all" rel="stylesheet" href="https://site-assets.fontawesome.com/releases/v7.2.0/css/fontawesome.css">
     <link media="all" rel="stylesheet" href="https://site-assets.fontawesome.com/releases/v7.2.0/css/brands.css">
     <link media="all" rel="stylesheet" href="https://site-assets.fontawesome.com/releases/v7.2.0/css/solid.css">
     <link media="all" rel="stylesheet" href="https://site-assets.fontawesome.com/releases/v7.2.0/css/regular.css">
+    <link media="all" rel="stylesheet" href="style.css">
 
 </head>
 
@@ -36,9 +36,9 @@
     <section class="container m-auto mt-12">
         <section class="flex bg-base-100 p-5 rounded-2xl shadow justify-between">
             <section>
-                <button class="btn btn-primary">All</button>
-                <button class="btn btn-outline btn-primary">Open</button>
-                <button class="btn btn-outline btn-primary">Closed</button>
+                <button onclick="issueBox(state)" class="btn btn-primary">All</button>
+                <button onclick="issueBox(state)" class="btn btn-outline btn-primary">Open</button>
+                <button onclick="issueBox(state)" class="btn btn-outline btn-primary">Closed</button>
             </section>
             <section></section>
         </section>
@@ -73,15 +73,12 @@
     </section>
 
     <section class="container m-auto mt-12 shadow p-5 bg-base-100 rounded-2xl">
-        Lorem ipsum dolor sit amet consectetur, adipisicing elit. Laborum minus eveniet vero nisi, tempore ab voluptatem
-        necessitatibus doloremque ullam quidem eligendi autem obcaecati sapiente dignissimos molestiae eum, illum ex,
-        similique repudiandae ut architecto repellendus et excepturi possimus. Vel quisquam illum vitae repellat dicta
-        fugiat eveniet autem consequuntur quidem veniam molestias ut quos consequatur numquam asperiores nam possimus
-        dolorem fuga architecto accusamus, voluptas sed eius tenetur! Saepe, dolorum. Aliquam, cupiditate. Vitae?
-        <br>
+      
+      <p class="loader"> </p> 
+       <br>
 
-        <section id="issuesContainer" class="grid-cols-4 container m-auto  grid gap-4">
-            <div>
+        <section id="issuesContainer" class="sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4  grid-cols-4 container m-auto  grid gap-4">
+            <!-- <div>
                 <div class="shadow p-3 py-4  rounded-tl-2xl rounded-tr-2xl border-t-4 border-green-400">
                     <div class="flex justify-between">
                         <div>
@@ -113,7 +110,7 @@
                     <br>
                     <p>1/15/2024</p>
                 </div>
-            </div>
+            </div> -->
             
 
 
