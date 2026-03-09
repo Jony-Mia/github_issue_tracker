@@ -2,6 +2,7 @@
 const issuesContainer = document.getElementById("issuesContainer")
 const loader = document.querySelector('.loader');
 const issueAPI = "https://phi-lab-server.vercel.app/api/v1/lab/issues";
+const issueDetailsAPI = "https://phi-lab-server.vercel.app/api/v1/lab/issue";
 
 // User Credential
 
@@ -54,7 +55,7 @@ function issueBox(state='all'){
     const date = new Date(`${issueData.createdAt}`);
     
           issuesContainer.innerHTML += `
-     <div class="h-full">
+     <div class="h-full" onclick="issueModal(${issueData.id})">
                 <div class="shadow  h-full flex flex-col justify-between pt-4 rounded-tl-lg rounded-tr-2xl border-t-4 border-${issueData.status==="open" ? "green":"violet"}-400">
                     <div class="flex p-3 justify-between">
                         <div>
@@ -70,12 +71,16 @@ function issueBox(state='all'){
                         <p>${issueData.description}</p>
                         <br>
                         <section>
-                            <button class="badge badge-outline badge-error rounded-full"> 
+                           <!-- <button class="badge badge-outline badge-error rounded-full"> 
                                 <i class="fa-brands fa-android"></i>
                                  Bugs</button>
                             <button class="badge badge-outline badge-warning rounded-full">
                                 <i class="fa-regular fa-life-ring"></i> 
                                 Help Wanted</button>
+                                -->
+                                ${
+                              issueData.labels.map(syn =>`<button class="badge badge-warning badge-soft text-neutral hover:bg-[#f0faff]">${syn}</button>`)
+                                }
 
                         </section>
 
@@ -95,7 +100,80 @@ function issueBox(state='all'){
   
 }
 
+async function issueModal(modalId){
 
+    /**
+     *  {
+"id": 33,
+"title": "Add bulk operations support",
+"description": "Allow users to perform bulk actions like delete, update status on multiple items at once.",
+"status": "open",
+"labels": [
+"enhancement"
+],
+"priority": "low",
+"author": "bulk_barry",
+"assignee": "",
+"createdAt": "2024-02-02T10:00:00Z",
+"updatedAt": "2024-02-02T10:00:00Z"
+}
+     */
+
+    let modalBox = document.getElementById('my_modal')
+    let res = await fetch(`${issueDetailsAPI}/${modalId}`);
+    let datas = await res.json()
+    // console.log(datas.data);
+    modalBox.showModal();
+    let {title,description,status,labels,priority,author,createdAt} = datas.data;
+    const date = new Date(`${createdAt}`);
+    modalBox.innerHTML=`
+     <div class="modal-box w-2xl max-w-3xl ">
+           
+            <h2 class="text-2xl font-bold">${title}</h2> <br>
+            <div class="flex text-gray-600 gap-2.5">
+                <div class="badge rounded-full badge-${status==="open"? "success":"primary"} block h-auto text-white">${status==="open" ? "Open":"Closed"}</div>
+                <div class="flex items-center gap-2">
+                    <span class="block w-[8px] h-[8px] bg-green-600 rounded-full"></span>
+                    <span class="font-semibold">Opened by ${author}</span>
+                </div>
+                <div class="flex items-center gap-2">
+                    <span class="block w-[8px] h-[8px] bg-violet-700 rounded-full"></span>
+                    <span class="font-semibold">${date.getDate()}/${date.getMonth()+1}/${date.getFullYear()}</span>
+                </div>
+            </div>
+            <br>
+            <section>
+               
+                ${
+                    labels.map(syn => `<button  class="btn bg-[#f0faff] text-neutral hover:bg-[#f0faff]">${syn}</button>`)
+                }
+                
+
+
+
+            </section>
+            <p class="py-4">${description}</p>
+
+            <section class="w-full m-auto">
+                <section class="p-3 grid grid-cols-2 bg-base-200 rounded-2xl">
+                    <div class="">
+                        <p>Assignee:</p>
+                        <p class="font-semibold">${author}</p>
+                    </div>
+                    <div class="">
+                        <p>Priority:</p>
+                        <p><span class="text-white rounded-full cursor-auto btn btn-sm bg-red-600">${priority}</span></p>
+                    </div>
+                </section>
+            </section>
+            <div class="modal-action">
+             <form method="dialog">
+                <button class="btn btn-primary ">Close</button>
+             </form>
+            </div>
+        </div>
+    `;
+}
 
 
 
