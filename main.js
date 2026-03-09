@@ -4,6 +4,7 @@ const loader = document.querySelector('.loader');
 const issueAPI = "https://phi-lab-server.vercel.app/api/v1/lab/issues";
 const issueDetailsAPI = "https://phi-lab-server.vercel.app/api/v1/lab/issue";
 
+
 // User Credential
 
 const user = localStorage.getItem("username");
@@ -49,7 +50,10 @@ issueBox()
  */
 function issueBox(state='all'){
     issuesContainer.innerHTML='';
+    const total = document.getElementById('total');
+
     let filterCategory = issues.filter(data=> state==="all"? data : data.status===state);
+     total.innerText = filterCategory.length
     
     filterCategory.forEach(issueData=>{
     const date = new Date(`${issueData.createdAt}`);
