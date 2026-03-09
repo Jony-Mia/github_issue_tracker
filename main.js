@@ -3,7 +3,7 @@ const issuesContainer = document.getElementById("issuesContainer")
 const loader = document.querySelector('.loader');
 const issueAPI = "https://phi-lab-server.vercel.app/api/v1/lab/issues";
 const issueDetailsAPI = "https://phi-lab-server.vercel.app/api/v1/lab/issue";
-
+let search = document.getElementById('search')
 
 // User Credential
 
@@ -22,15 +22,26 @@ async function issuesLoader(){
     }else{
        
     loader.style.display="none"    
-    issuesList.data.forEach(element => {
-        issues.push(element);
-    }); 
+
+    issuesList.data.forEach( element => issues.push(element) ); 
    }
+   
+
 issueBox()
 }
 
+async function searchField(){
 
+    let res = await fetch(`https://phi-lab-server.vercel.app/api/v1/lab/issues/search?q=${search.value}`);
+    let result = await res.json();
 
+    result.data.forEach(element => issues = element ); 
+    
+    console.log(issues);
+    issueBox()
+    return issues;
+      
+}
 /**
  *   {
       "id": 1,
@@ -83,7 +94,7 @@ function issueBox(state='all'){
                                 Help Wanted</button>
                                 -->
                                 ${
-                              issueData.labels.map(syn =>`<button class="badge badge-warning badge-soft text-neutral hover:bg-[#f0faff]">${syn}</button>`)
+                              issueData.labels.map(syn =>`<img src="assets/${syn}.png" width="40" class="badge badge-warning badge-soft text-neutral hover:bg-[#f0faff]">${syn}</img>`)
                                 }
 
                         </section>
@@ -104,24 +115,10 @@ function issueBox(state='all'){
   
 }
 
+
+
 async function issueModal(modalId){
 
-    /**
-     *  {
-"id": 33,
-"title": "Add bulk operations support",
-"description": "Allow users to perform bulk actions like delete, update status on multiple items at once.",
-"status": "open",
-"labels": [
-"enhancement"
-],
-"priority": "low",
-"author": "bulk_barry",
-"assignee": "",
-"createdAt": "2024-02-02T10:00:00Z",
-"updatedAt": "2024-02-02T10:00:00Z"
-}
-     */
 
     let modalBox = document.getElementById('my_modal')
     let res = await fetch(`${issueDetailsAPI}/${modalId}`);
@@ -148,13 +145,8 @@ async function issueModal(modalId){
             <br>
             <section>
                
-                ${
-                    labels.map(syn => `<button  class="btn bg-[#f0faff] text-neutral hover:bg-[#f0faff]">${syn}</button>`)
-                }
+            ${labels.map(syn =>`<img src="assets/${syn}.png" width="40" class="badge badge-warning badge-soft text-neutral hover:bg-[#f0faff]">${syn}</img>`)}
                 
-
-
-
             </section>
             <p class="py-4">${description}</p>
 
@@ -178,15 +170,6 @@ async function issueModal(modalId){
         </div>
     `;
 }
-
-
-
-
-
-
-
-
-
 
 
 issuesLoader()

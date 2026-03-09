@@ -27,7 +27,7 @@
             </section>
             <section class="">
                 <div class="flex gap-2 items-center">
-                    <input type="text" class="input inline-block" placeholder="Search issues">
+                    <input type="text" id="search" oninput="searchField()" class="input inline-block" placeholder="Search issues">
                     <button class="btn btn-primary  inline-block">New Issue</button>
                 </div>
             </section>
@@ -39,7 +39,7 @@
             <section>
                 <button onclick="issueBox('all')" class="btn btn-primary">All</button>
                 <button onclick="issueBox('open')" class="btn btn-outline btn-primary">Open</button>
-                <button onclick="issueBox('closed')" class="btn btn-outline btn-primary">Closed</button>
+                <button onclick="issueBox('closed')" class="btn active btn-outline btn-primary">Closed</button>
             </section>
             <section></section>
         </section>
