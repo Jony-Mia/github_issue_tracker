@@ -28,7 +28,7 @@
             <section class="">
                 <div class="flex gap-2 items-center">
                     <input type="text" id="search" oninput="searchField()" class="input inline-block" placeholder="Search issues">
-                    <button class="btn btn-primary  inline-block">New Issue</button>
+                    <button onclick="searchField()" class="btn btn-primary  inline-block">New Issue</button>
                 </div>
             </section>
         </section>
@@ -37,9 +37,9 @@
     <section class="container m-auto mt-12">
         <section class="flex bg-base-100 p-5 rounded-2xl shadow justify-between">
             <section>
-                <button onclick="issueBox('all')" class="btn btn-primary">All</button>
-                <button onclick="issueBox('open')" class="btn btn-outline btn-primary">Open</button>
-                <button onclick="issueBox('closed')" class="btn active btn-outline btn-primary">Closed</button>
+                <button onclick="filterData('all')" class="btn btn-primary">All</button>
+                <button onclick="filterData('open')" class="btn btn-outline btn-primary">Open</button>
+                <button onclick="filterData('closed')" class="btn active btn-outline btn-primary">Closed</button>
             </section>
             <section></section>
         </section>
@@ -98,7 +98,7 @@
 
         <section id="issuesContainer"
             class="sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4  grid-cols-1 container m-auto  grid gap-4">
-            <div>
+            <!-- <div>
                 <div class="shadow p-3 py-4  rounded-tl-2xl rounded-tr-2xl border-t-4 border-green-400">
                     <div class="flex justify-between">
                         <div>
@@ -130,7 +130,7 @@
                     <br>
                     <p>1/15/2024</p>
                 </div>
-            </div>
+            </div> -->
 
 
 

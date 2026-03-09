@@ -3,7 +3,6 @@ const issuesContainer = document.getElementById("issuesContainer")
 const loader = document.querySelector('.loader');
 const issueAPI = "https://phi-lab-server.vercel.app/api/v1/lab/issues";
 const issueDetailsAPI = "https://phi-lab-server.vercel.app/api/v1/lab/issue";
-let search = document.getElementById('search')
 
 // User Credential
 
@@ -22,25 +21,37 @@ async function issuesLoader(){
     }else{
        
     loader.style.display="none"    
-
-    issuesList.data.forEach( element => issues.push(element) ); 
-   }
-   
-
-issueBox()
+    let info= issuesList.data.map( element => issues=element) ; 
+    issueBox(info)
+}
 }
 
 async function searchField(){
 
-    let res = await fetch(`https://phi-lab-server.vercel.app/api/v1/lab/issues/search?q=${search.value}`);
-    let result = await res.json();
-
-    result.data.forEach(element => issues = element ); 
+    let search = document.getElementById('search').value.trim()
+    if(search==='') return;
     
-    console.log(issues);
-    issueBox()
-    return issues;
-      
+    let res    = await fetch(`https://phi-lab-server.vercel.app/api/v1/lab/issues/search?q=${search}`);
+     if (!res.status===200) {
+       loader.style.display="block";  
+    }else{
+       loader.style.display="none";  
+
+    let result = await res.json();
+    
+    total.innerText = result.data.length;
+    issueBox(result.data);
+    }
+    
+}
+
+async function filterData(type){
+     let res = await fetch(issueAPI);
+     let issuesList = await res.json();
+     let filterCategory = issuesList.data.filter(data=> type==="all"? data : data.status===type);
+      total.innerText = filterCategory.length
+     issueBox(filterCategory);
+     
 }
 /**
  *   {
@@ -59,18 +70,19 @@ async function searchField(){
       "updatedAt": "2024-01-15T10:30:00Z"
     },
  */
-function issueBox(state='all'){
+function issueBox(state){
     issuesContainer.innerHTML='';
     const total = document.getElementById('total');
-
-    let filterCategory = issues.filter(data=> state==="all"? data : data.status===state);
-     total.innerText = filterCategory.length
     
-    filterCategory.forEach(issueData=>{
-    const date = new Date(`${issueData.createdAt}`);
+    // let filterCategory = issues.filter(data=> state==="all"? data : data.status===state);
+    
+
+      
+         state.forEach(issueData=>{
+        const date = new Date(`${issueData.createdAt}`);
     
           issuesContainer.innerHTML += `
-     <div class="h-full" onclick="issueModal(${issueData.id})">
+            <div class="h-full" onclick="issueModal(${issueData.id})">
                 <div class="shadow  h-full flex flex-col justify-between pt-4 rounded-tl-lg rounded-tr-2xl border-t-4 border-${issueData.status==="open" ? "green":"violet"}-400">
                     <div class="flex p-3 justify-between">
                         <div>
@@ -109,16 +121,11 @@ function issueBox(state='all'){
             </div>
         </div>
     `;
-
-    })
-
+     })
+     
+    }
   
-}
-
-
-
 async function issueModal(modalId){
-
 
     let modalBox = document.getElementById('my_modal')
     let res = await fetch(`${issueDetailsAPI}/${modalId}`);
