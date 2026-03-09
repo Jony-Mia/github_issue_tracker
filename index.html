@@ -36,9 +36,9 @@
     <section class="container m-auto mt-12">
         <section class="flex bg-base-100 p-5 rounded-2xl shadow justify-between">
             <section>
-                <button onclick="issueBox(state)" class="btn btn-primary">All</button>
-                <button onclick="issueBox(state)" class="btn btn-outline btn-primary">Open</button>
-                <button onclick="issueBox(state)" class="btn btn-outline btn-primary">Closed</button>
+                <button onclick="issueBox('all')" class="btn btn-primary">All</button>
+                <button onclick="issueBox('open')" class="btn btn-outline btn-primary">Open</button>
+                <button onclick="issueBox('closed')" class="btn btn-outline btn-primary">Closed</button>
             </section>
             <section></section>
         </section>
@@ -72,13 +72,66 @@
         </section>
     </section>
 
-    <section class="container m-auto mt-12 shadow p-5 bg-base-100 rounded-2xl">
-      
-      <p class="loader"> </p> 
-       <br>
 
-        <section id="issuesContainer" class="sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4  grid-cols-4 container m-auto  grid gap-4">
-            <!-- <div>
+
+    <!-- You can open the modal using ID.showModal() method -->
+    <button class="btn" onclick="my_modal_3.showModal()">open modal</button>
+    <dialog id="my_modal_3" class="modal">
+        <div class="modal-box w-2xl max-w-3xl ">
+            <form method="dialog">
+                <button class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">✕</button>
+            </form>
+            <h2 class="text-2xl font-bold">Fix the broken image button</h2> <br>
+            <div class="flex text-gray-600 gap-2.5">
+                <div class="badge badge-success block h-auto text-white">Open</div>
+                <div class="flex items-center gap-2">
+                    <span class="block w-[8px] h-[8px] bg-green-600 rounded-full"></span>
+                    <span class="font-semibold">Opened by Fahim Ahmed</span>
+                </div>
+                <div class="flex items-center gap-2">
+                    <span class="block w-[8px] h-[8px] bg-violet-700 rounded-full"></span>
+                    <span class="font-semibold">22/02/2026</span>
+                </div>
+            </div>
+            <br>
+            <section>
+                <button class="badge badge-outline badge-error rounded-full">
+                    <i class="fa-brands fa-android"></i>
+                    Bugs
+                </button>
+                <button class="badge badge-outline badge-warning rounded-full">
+                    <i class="fa-regular fa-life-ring"></i>
+                    Help Wanted
+                </button>
+
+            </section>
+            <p class="py-4">The navigation menu doesn't collapse properly on mobile devices. Need to fix the responsive
+                behavior.</p>
+
+                <section>
+                    
+                </section>
+        </div>
+    </dialog>
+
+
+
+
+
+
+
+
+
+
+
+    <section class="container m-auto mt-12 shadow p-5 bg-base-100 rounded-2xl">
+
+        <p class="loader"> </p>
+        <br>
+
+        <section id="issuesContainer"
+            class="sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4  grid-cols-1 container m-auto  grid gap-4">
+            <div>
                 <div class="shadow p-3 py-4  rounded-tl-2xl rounded-tr-2xl border-t-4 border-green-400">
                     <div class="flex justify-between">
                         <div>
@@ -90,15 +143,15 @@
                         </div>
                     </div>
                     <div>
-                        <h3 class="text-2xl my-3 font-bold" >Fix navigation menu on mobile devices</h3>
+                        <h3 class="text-2xl my-3 font-bold">Fix navigation menu on mobile devices</h3>
                         <p>The navigation menu doesn't collapse properly on mobile devices...</p>
                         <br>
                         <section>
-                            <button class="btn btn-outline btn-error rounded-full"> 
+                            <button class="btn btn-outline btn-error rounded-full">
                                 <i class="fa-brands fa-android"></i>
-                                 Bugs</button>
+                                Bugs</button>
                             <button class="btn btn-outline btn-warning rounded-full">
-                                <i class="fa-regular fa-life-ring"></i> 
+                                <i class="fa-regular fa-life-ring"></i>
                                 Help Wanted</button>
 
                         </section>
@@ -110,8 +163,8 @@
                     <br>
                     <p>1/15/2024</p>
                 </div>
-            </div> -->
-            
+            </div>
+
 
 
         </section>

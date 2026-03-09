@@ -46,15 +46,17 @@ issueBox()
       "updatedAt": "2024-01-15T10:30:00Z"
     },
  */
-function issueBox(state){
+function issueBox(state='all'){
     issuesContainer.innerHTML='';
-    issues.forEach(issueData=>{
+    let filterCategory = issues.filter(data=> state==="all"? data : data.status===state);
+    
+    filterCategory.forEach(issueData=>{
     const date = new Date(`${issueData.createdAt}`);
     
           issuesContainer.innerHTML += `
      <div class="h-full">
-                <div class="shadow p-3 py-4 rounded-tl-2xl rounded-tr-2xl border-t-4 border-${issueData.status==="open" ? "green":"violet"}-400">
-                    <div class="flex justify-between">
+                <div class="shadow  h-full flex flex-col justify-between pt-4 rounded-tl-lg rounded-tr-2xl border-t-4 border-${issueData.status==="open" ? "green":"violet"}-400">
+                    <div class="flex p-3 justify-between">
                         <div>
                             <img src="assets/${issueData.status==="open" ? "Open-Status":"Closed- Status "}.png" alt="">
                         </div>
@@ -63,7 +65,7 @@ function issueBox(state){
                             <p class="badge badge-error bg-error/10 text-error badge-outline">High</p>
                         </div>
                     </div>
-                    <div>
+                    <div class=" p-3">
                         <h3 class="text-2xl my-3 font-bold" >${issueData.title}</h3>
                         <p>${issueData.description}</p>
                         <br>
@@ -78,14 +80,14 @@ function issueBox(state){
                         </section>
 
                     </div>
-                </div>
-                <div class=" p-3 shadow rounded-bl-2xl  rounded-br-2xl">
+ 
+                <div class="mt-3 p-3 shadow rounded">
                     <p> ${issueData.author} </p>
                     <br>
                     <p>${date.getDate()}/${date.getMonth()}/${date.getFullYear()}/</p>
                 </div>
             </div>
-    
+        </div>
     `;
 
     })
