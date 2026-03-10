@@ -3,15 +3,21 @@ const issuesContainer = document.getElementById("issuesContainer")
 const loader = document.querySelector('.loader');
 const issueAPI = "https://phi-lab-server.vercel.app/api/v1/lab/issues";
 const issueDetailsAPI = "https://phi-lab-server.vercel.app/api/v1/lab/issue";
+const noData = document.getElementById('noData')
+
+const all = document.getElementById('all');
+const opened = document.getElementById('open');
+const closed = document.getElementById("closed")
 
 // User Credential
-
 const user = localStorage.getItem("username");
 const password = localStorage.getItem("password");
 
-if (!user || !password) window.open("http://127.0.0.1:5500/login.html","_self");
-
 let issues=[];
+noData.style.display="none";  
+
+
+if (!user || !password) window.open(`${window.location.origin}/login.html`,"_self");
 
 async function issuesLoader(){
    let res = await fetch(issueAPI);
@@ -30,26 +36,47 @@ async function searchField(){
 
     let search = document.getElementById('search').value.trim()
     if(search==='') return;
-    
+
     let res    = await fetch(`https://phi-lab-server.vercel.app/api/v1/lab/issues/search?q=${search}`);
      if (!res.status===200) {
        loader.style.display="block";  
     }else{
-       loader.style.display="none";  
-
-    let result = await res.json();
-    
-    total.innerText = result.data.length;
-    issueBox(result.data);
+        loader.style.display="none";  
+        let result = await res.json();
+        total.innerText = result.data.length;
+        if (result.data.length===0) {
+            noData.style.display="block"; 
+        }else{
+            noData.style.display="none";  
+        }
+        // issueBox(result.data);
     }
     
 }
 
-async function filterData(type){
+async function filterData(type="all"){
      let res = await fetch(issueAPI);
      let issuesList = await res.json();
      let filterCategory = issuesList.data.filter(data=> type==="all"? data : data.status===type);
-      total.innerText = filterCategory.length
+     
+    if (type=="all") {
+        all.classList.add('active')
+        opened.classList.remove('active')
+        closed.classList.remove('active')
+    }else if (type==="open") {
+        all.classList.remove('active')
+        opened.classList.add('active')
+        closed.classList.remove('active')
+        
+    }else{
+        all.classList.remove('active')
+        opened.classList.remove('active')
+        closed.classList.add('active')
+        
+    }
+    
+
+     total.innerText = filterCategory.length
      issueBox(filterCategory);
      
 }
@@ -74,10 +101,6 @@ function issueBox(state){
     issuesContainer.innerHTML='';
     const total = document.getElementById('total');
     
-    // let filterCategory = issues.filter(data=> state==="all"? data : data.status===state);
-    
-
-      
          state.forEach(issueData=>{
         const date = new Date(`${issueData.createdAt}`);
     

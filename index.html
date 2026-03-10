@@ -17,11 +17,11 @@
 
 <body class="bg-[#F8FAFC] pb-10">
     <nav class=" bg-base-100 shadow p-3 ">
-        <section class="flex container m-auto justify-between items-center">
+        <section class="flex flex-wrap gap-3 container m-auto justify-between items-center">
             <section class="">
                 <div class="flex items-center gap-3">
                     <img width="50" src="assets/github-logo.png" alt="">
-                    <h2 class="font-bold text-2xl">Github Issue Tracker</h2>
+                    <h2 class="font-bold sm:text-sm md:text-2xl lg:text-3xl text-lg">Github Issue Tracker</h2>
                 </div>
 
             </section>
@@ -37,18 +37,18 @@
     <section class="container m-auto mt-12">
         <section class="flex bg-base-100 p-5 rounded-2xl shadow justify-between">
             <section>
-                <button onclick="filterData('all')" class="btn btn-primary">All</button>
-                <button onclick="filterData('open')" class="btn btn-outline btn-primary">Open</button>
-                <button onclick="filterData('closed')" class="btn active btn-outline btn-primary">Closed</button>
+                <button id="all" onclick="filterData('all')" class="btn active btn-outline btn-primary">All</button>
+                <button id="open" onclick="filterData('open')" class="btn btn-outline btn-primary">Open</button>
+                <button id="closed" onclick="filterData('closed')" class="btn  btn-outline btn-primary">Closed</button>
             </section>
             <section></section>
         </section>
     </section>
 
     <section class="container m-auto mt-12">
-        <section class="flex bg-base-100 p-5 rounded-2xl shadow justify-between">
+        <section class="flex bg-base-100 p-5 gap-3 flex-wrap rounded-2xl shadow justify-between">
             <section>
-                <div class="flex items-center gap-3">
+                <div class="flex flex-wrap items-center gap-3">
                     <div>
                         <img width="50" src="assets/Aperture.png" alt="">
                     </div>
@@ -95,9 +95,9 @@
 
         <p class="loader"> </p>
         <br>
+            <p class="text-center font-semibold text-3xl mb-4" id="noData">No data found</p>
 
-        <section id="issuesContainer"
-            class="sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4  grid-cols-1 container m-auto  grid gap-4">
+        <section id="issuesContainer" class="sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4  grid-cols-1 container m-auto  grid gap-4">
             <!-- <div>
                 <div class="shadow p-3 py-4  rounded-tl-2xl rounded-tr-2xl border-t-4 border-green-400">
                     <div class="flex justify-between">
@@ -130,15 +130,16 @@
                     <br>
                     <p>1/15/2024</p>
                 </div>
-            </div> -->
-
+            </div>
+            
+            -->
 
 
         </section>
 
     </section>
     <script src="browser@4.js"></script>
-    <script src="main.js"></script>
+    <script src="main.js"></script> 
 </body>
 
 </html>

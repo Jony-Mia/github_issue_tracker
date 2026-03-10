@@ -37,3 +37,8 @@
         --angle: 360deg;
     }
 }
+
+.active{
+    background: #422ad5;
+    color: white;
+}
