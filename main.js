@@ -44,12 +44,14 @@ async function searchField(){
         loader.style.display="none";  
         let result = await res.json();
         total.innerText = result.data.length;
+
         if (result.data.length===0) {
             noData.style.display="block"; 
         }else{
             noData.style.display="none";  
         }
-        // issueBox(result.data);
+        
+        issueBox(result.data);
     }
     
 }
