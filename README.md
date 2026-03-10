@@ -6,16 +6,20 @@
 
 <h1>3️⃣ What is the difference between map(), filter(), and forEach()?</h1>
 
+<h3>
 <pre>
-
-    <h3>
-        map(), filter() and forEach() used to apply loop on array. But they have their different use cases.
+ map(), filter() and forEach() used to apply loop on   
+ array. But they have their different use cases.
         
-        map(): do any task on array and return a new array
-        filter(): filter particular arrays and return a new array
-        forEach(): it run loop each element on array but it does not return any array
-    </h3>
+    map(): do any task on array and return a new array
+
+    filter(): it need conditions to filter particular arrays and return a new array
+    
+    forEach(): it through loop each element on array but it does not return new array
+        
 </pre>
+</h3>
+    
 
 <h1>4️⃣ What is an arrow function?</h1>
 <h3>Arrow function ()=>{} is short form of function. It use mostly use for declare anonymous function instead of function(){}. It also can declare in variable. Arrow function also called as function expression </h3>
