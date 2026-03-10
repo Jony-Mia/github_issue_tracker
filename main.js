@@ -1,27 +1,24 @@
-
-const issuesContainer = document.getElementById("issuesContainer")
-const loader = document.querySelector('.loader');
-const issueAPI = "https://phi-lab-server.vercel.app/api/v1/lab/issues";
+const issuesContainer = document.getElementById("issuesContainer");
 const issueDetailsAPI = "https://phi-lab-server.vercel.app/api/v1/lab/issue";
-const noData = document.getElementById('noData')
-
-const all = document.getElementById('all');
+const issueAPI = "https://phi-lab-server.vercel.app/api/v1/lab/issues";
+const loader = document.querySelector('.loader');
+const noData = document.getElementById('noData');
+const all    = document.getElementById('all');
 const opened = document.getElementById('open');
-const closed = document.getElementById("closed")
-
+const closed = document.getElementById("closed");
+let   issues = [];
 // User Credential
 const user = localStorage.getItem("username");
 const password = localStorage.getItem("password");
 
-let issues=[];
 noData.style.display="none";  
 
-
 if (!user || !password) window.open(`${window.location.origin}/login.html`,"_self");
-
+// Fetch Issues from API
 async function issuesLoader(){
-   let res = await fetch(issueAPI);
-   let issuesList = await res.json();
+    try {
+       let res = await fetch(issueAPI);
+     let issuesList = await res.json();
    if (!res.status===200) {
        loader.style.display="block";  
     }else{
@@ -30,14 +27,20 @@ async function issuesLoader(){
     let info= issuesList.data.map( element => issues=element) ; 
     issueBox(info)
 }
+   } catch (error) {
+    console.log('hello');
+    
+   }
+  
 }
-
+// Search issues from API
 async function searchField(){
 
     let search = document.getElementById('search').value.trim()
     if(search==='') return;
 
-    let res    = await fetch(`https://phi-lab-server.vercel.app/api/v1/lab/issues/search?q=${search}`);
+    try {
+        let res    = await fetch(`https://phi-lab-server.vercel.app/api/v1/lab/issues/search?q=${search}`);
      if (!res.status===200) {
        loader.style.display="block";  
     }else{
@@ -53,10 +56,15 @@ async function searchField(){
         
         issueBox(result.data);
     }
+    } catch (error) {
+        console.log("data loading failed");
+        
+    }
     
 }
-
+// Filtering all issues by all, open, closed
 async function filterData(type="all"){
+     try {
      let res = await fetch(issueAPI);
      let issuesList = await res.json();
      let filterCategory = issuesList.data.filter(data=> type==="all"? data : data.status===type);
@@ -74,31 +82,18 @@ async function filterData(type="all"){
         all.classList.remove('active')
         opened.classList.remove('active')
         closed.classList.add('active')
-        
     }
     
-
-     total.innerText = filterCategory.length
+    total.innerText = filterCategory.length
      issueBox(filterCategory);
+     } catch (error) {
+        console.log('Data does not loaded, filtring not possible');
+        
+     }
      
 }
-/**
- *   {
-      "id": 1,
-      "title": "Fix navigation menu on mobile devices",
-      "description": "The navigation menu doesn't collapse properly on mobile devices. Need to fix the responsive behavior.",
-      "status": "open",
-      "labels": [
-        "bug",
-        "help wanted"
-      ],
-      "priority": "high",
-      "author": "john_doe",
-      "assignee": "jane_smith",
-      "createdAt": "2024-01-15T10:30:00Z",
-      "updatedAt": "2024-01-15T10:30:00Z"
-    },
- */
+
+// Structure fo issues box
 function issueBox(state){
     issuesContainer.innerHTML='';
     const total = document.getElementById('total');
@@ -131,7 +126,7 @@ function issueBox(state){
                                 Help Wanted</button>
                                 -->
                                 ${
-                              issueData.labels.map(syn =>`<img src="assets/${syn}.png" width="40" class="badge badge-warning badge-soft text-neutral hover:bg-[#f0faff]">${syn}</img>`)
+                              issueData.labels.map(syn => ` <img src="assets/${syn}.png" width="40" class="badge badge-ghost badge-soft text-neutral hover:bg-[#f0faff]"/>${syn}`)
                                 }
 
                         </section>
@@ -148,8 +143,8 @@ function issueBox(state){
     `;
      })
      
-    }
-  
+}
+// issue modal
 async function issueModal(modalId){
 
     let modalBox = document.getElementById('my_modal')
@@ -182,7 +177,7 @@ async function issueModal(modalId){
             </section>
             <p class="py-4">${description}</p>
 
-            <section class="w-full m-auto">
+            <section class="w-full m-auto ">
                 <section class="p-3 grid grid-cols-2 bg-base-200 rounded-2xl">
                     <div class="">
                         <p>Assignee:</p>
@@ -202,6 +197,5 @@ async function issueModal(modalId){
         </div>
     `;
 }
-
 
 issuesLoader()
