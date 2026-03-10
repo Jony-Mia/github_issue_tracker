@@ -158,7 +158,7 @@ async function issueModal(modalId){
     let {title,description,status,labels,priority,author,createdAt} = datas.data;
     const date = new Date(`${createdAt}`);
     modalBox.innerHTML=`
-     <div class="modal-box w-2xl max-w-3xl ">
+     <div class="modal-box w-[90%] max-w-3xl ">
            
             <h2 class="text-2xl font-bold">${title}</h2> <br>
             <div class="flex text-gray-600 gap-2.5">
