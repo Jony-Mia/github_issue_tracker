@@ -27,8 +27,6 @@ submit.onclick = ()=>{
     
 }
 
-
 if (user === "admin" && password==="admin123") {
    window.open(window.location.origin,"_self")
 }
-
