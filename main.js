@@ -21,6 +21,7 @@ async function issuesLoader(){
     try {
        let res = await fetch(issueAPI);
      let issuesList = await res.json();
+     total.innerText = issuesList.data.length;
    if (!res.status===200) {
        loader.style.display="block";  
     }else{
