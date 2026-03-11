@@ -18,7 +18,7 @@ submit.onclick = ()=>{
     if(username === "admin" && pass === "admin123"){
     localStorage.setItem("username","admin")
     localStorage.setItem("password","admin123")
-    window.open(window.location.origin,"_self")
+    window.open('/',"_self")
     }else{
         username="";
         pass=""
