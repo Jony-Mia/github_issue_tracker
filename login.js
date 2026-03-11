@@ -8,8 +8,6 @@ const user = localStorage.getItem("username");
 const password = localStorage.getItem("password");
 
 submit.onclick = ()=>{
-
-
     let username = document.getElementById("gitemail").value.trim();
     let pass = document.getElementById("password").value.trim();
   
