@@ -13,7 +13,7 @@ const password = localStorage.getItem("password");
 
 noData.style.display="none";  
 
-if (!user || !password) window.open(`/login.html`,"_self");
+if (!user || !password) window.open(`${window.location.origin}/github_issue_tracker/login.html`,"_self");
 // Fetch Issues from API
 async function issuesLoader(){
     try {

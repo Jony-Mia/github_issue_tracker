@@ -18,7 +18,7 @@ submit.onclick = ()=>{
     if(username === "admin" && pass === "admin123"){
     localStorage.setItem("username","admin")
     localStorage.setItem("password","admin123")
-    window.open('/',"_self")
+    window.open(`${window.location.origin}/github_issue_tracker`,"_self")
     }else{
         username="";
         pass=""
@@ -27,6 +27,8 @@ submit.onclick = ()=>{
     
 }
 
+
 if (user === "admin" && password==="admin123") {
-   window.open(window.location.origin,"_self")
+   window.open(`${window.location.origin}/github_issue_tracker`,"_self")
 }
+
